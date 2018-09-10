@@ -9,19 +9,22 @@ import static org.junit.Assert.*;
 
 public class NodeTest {
 
-    int[] array = {1, 2, 3, 4, 5, 6, 7};
-    Node top = Node.putIntoList(array);
 
     @Test
     public void putIntoList() {
-        assertEquals("1 -> 2 -> 3 -> 4 -> 5 -> 6 -> 7 -> null", Node.listToString(Node.putIntoList(array)));
+        SimplyLinkedList list = new SimplyLinkedList();
+        int[] array = {1, 2, 3, 4, 5, 6, 7};
+        list.putIntoList(array);
+        assertEquals("1 -> 2 -> 3 -> 4 -> 5 -> 6 -> 7 -> null", list.listToString());
     }
 
     @Test
     public void deleteElement() {
-        Node.deleteElement(top, 3);
-        String result = Node.listToString(top);
-        assertEquals("1 -> 2 -> 3 -> 5 -> 6 -> 7 -> null", result);
+        SimplyLinkedList list = new SimplyLinkedList();
+        int[] array = {1, 2, 3, 4, 5, 6, 7};
+        list.putIntoList(array);
+        list.deleteElement(3);
+        assertEquals("1 -> 2 -> 3 -> 5 -> 6 -> 7 -> null", list.listToString());
     }
 
     @Rule
@@ -29,35 +32,45 @@ public class NodeTest {
 
     @Test
     public void getElement() {
-        assertEquals(4, Node.getElement(top, 3));
-        assertEquals(7, Node.getElement(top, 6));
+        SimplyLinkedList list = new SimplyLinkedList();
+        int[] array = {1, 2, 3, 4, 5, 6, 7};
+
+        list.putIntoList(array);
+        assertEquals(4, list.getElement(3));
+//        assertEquals(7, list.getElement(6));
 
         exception.expect(IndexOutOfBoundsException.class);
-        Node.getElement(top, 17);
+        list.getElement(17);
     }
 
 
     @Test
     public void addLast() {
-        assertEquals("1 -> 2 -> 3 -> 4 -> 5 -> 6 -> 7 -> 45 -> null", Node.listToString(Node.addLast(top, 45)));
-    }
+        SimplyLinkedList list = new SimplyLinkedList();
+        int[] array = {1, 2, 3, 4, 5, 6, 7};
+        list.putIntoList(array);
 
-    @Test
-    public void addFirst() {
-        assertEquals("45 -> 1 -> 2 -> 3 -> 4 -> 5 -> 6 -> 7 -> null", Node.listToString(Node.addFirst(top, 45)));
-    }
+        list.addLast(45);
 
-    @Test
-    public void addMiddle() {
-        assertEquals("1 -> 2 -> 3 -> 67 -> 4 -> 5 -> 6 -> 7 -> null", Node.listToString(Node.addMiddle(top, 67, 3)));
-        assertEquals("67 -> null", Node.listToString(Node.addMiddle(null, 67, 3)));
-
-        exception.expect(IndexOutOfBoundsException.class);
-        Node.addMiddle(top, 67, 12);
+        assertEquals("1 -> 2 -> 3 -> 4 -> 5 -> 6 -> 7 -> 45 -> null",list.listToString());
     }
-
-    @Test
-    public void reverse() {
-        assertEquals("7 -> 6 -> 5 -> 4 -> 3 -> 2 -> 1 -> null", Node.listToString(Node.reverse(top)));
-    }
+//
+//    @Test
+//    public void addFirst() {
+//        assertEquals("45 -> 1 -> 2 -> 3 -> 4 -> 5 -> 6 -> 7 -> null",Node.listToString(Node.addFirst(top,45)));
+//    }
+//
+//    @Test
+//    public void addMiddle() {
+//        assertEquals("1 -> 2 -> 3 -> 67 -> 4 -> 5 -> 6 -> 7 -> null", Node.listToString(Node.addMiddle(top, 67, 3)));
+//        assertEquals("67 -> null", Node.listToString(Node.addMiddle(null, 67, 3)));
+//
+//        exception.expect(IndexOutOfBoundsException.class);
+//        Node.addMiddle(top,67, 12);
+//    }
+//
+//    @Test
+//    public void reverse() {
+//        assertEquals("7 -> 6 -> 5 -> 4 -> 3 -> 2 -> 1 -> null", Node.listToString(Node.reverse(top)));
+//    }
 }
