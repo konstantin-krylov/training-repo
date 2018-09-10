@@ -5,7 +5,7 @@ import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
 import static junit.framework.TestCase.assertEquals;
-import static org.junit.Assert.*;
+
 
 public class NodeTest {
 
@@ -67,19 +67,19 @@ public class NodeTest {
 
     @Test
     public void addMiddle() {
+        /** Тест, если список пуст*/
+        SimplyLinkedList list1 = new SimplyLinkedList();
+        list1.addMiddle(67, 0);
+        assertEquals("67 -> null", list1.listToString());
+
+
         SimplyLinkedList list = new SimplyLinkedList();
-
-        // ЭТОТ ТЕСТ НЕ ПРОХОДИТ!!!
-        list.addMiddle(67, 3);
-        assertEquals("67 -> null", list.listToString());
-
-
         int[] array = {1, 2, 3, 4, 5, 6, 7};
         list.putIntoList(array);
-
         list.addMiddle(67, 3);
         assertEquals("1 -> 2 -> 3 -> 67 -> 4 -> 5 -> 6 -> 7 -> null", list.listToString());
 
+        /** Тест, если выходим за пределы списка*/
         exception.expect(IndexOutOfBoundsException.class);
         list.addMiddle(67, 12);
     }

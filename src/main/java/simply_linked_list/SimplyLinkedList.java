@@ -4,19 +4,16 @@ public class SimplyLinkedList {
 
     private Node top;
 
-
     public SimplyLinkedList() {
     }
 
-    public Node putIntoList(int[] nums) {
+    public void putIntoList(int[] nums) {
 
         for (int i = nums.length - 1; i >= 0; i--) {
             int element = nums[i];
             Node prev = top;
             top = new Node(element, prev);
         }
-
-        return this.top;
     }
 
     public String listToString() {
@@ -65,13 +62,15 @@ public class SimplyLinkedList {
 
     }
 
-    public Node addLast(int newElement) {
+    public void addLast(int newElement) {
 
         //Прячем значение начала списка в переменную
         Node head = top;
 
-        // проверка, если список пуст
-        if (head == null) return new Node(newElement, null);
+        // проверка, если список пуст, применяем метод addFirst
+        if (head == null) {
+            addFirst(newElement);
+        }
 
         // пробегаем по всему списку до последнего элемента
         while (head.getNext() != null) {
@@ -79,36 +78,31 @@ public class SimplyLinkedList {
         }
         head.setNext(new Node(newElement, null));
 
-        return top;
-
     }
 
-    public Node addFirst(int newElement) {
+    public void addFirst(int newElement) {
 
         Node next = top;
         top = new Node(newElement, next);
 
-        return top;
     }
 
-    public Node addMiddle(int newElement, int index) {
+    public void addMiddle(int newElement, int index) {
 
-        Node head = top; // здесь хранится ссылка на начало списка
-
-        // проверка, если список пуст
+        // проверка, если список пуст, применяем метод addFirst
         if (top == null) {
-            return new Node(newElement, null); //В ЭТОМ МЕСТЕ БАГ!!!
+            addFirst(newElement);
+            return;
         }
 
+        Node head = top; // здесь хранится ссылка на начало списка
         int count = 0;
 
         while (head != null) {
             if (count == index - 1) {
                 Node storeNext = head.getNext(); // здесь храним ссылку на элемент, идущий после нового элемента
                 head.setNext(new Node(newElement, storeNext));
-
-                return head;
-
+                return;
             }
             head = head.getNext();
             count++;
@@ -116,7 +110,7 @@ public class SimplyLinkedList {
         throw new IndexOutOfBoundsException(); // если не зашли в if, значит вывалились из списка
     }
 
-    public Node reverse() {
+    public void reverse() {
         Node head = top;
 
         Node prev = null;
@@ -128,9 +122,7 @@ public class SimplyLinkedList {
             prev = head;
             head = next;
         }
-        // ВОТ ЗДЕСЬ МОЖЕТ БАГ!!
         top = prev;
-        return top;
     }
 
 }
