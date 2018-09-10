@@ -4,10 +4,6 @@ public class SimplyLinkedList {
 
     private Node top;
 
-    public SimplyLinkedList(Node top) {
-        this.top = top;
-    }
-
 
     public SimplyLinkedList() {
     }
@@ -24,12 +20,13 @@ public class SimplyLinkedList {
     }
 
     public String listToString() {
+        Node head = top;
         String result = "";
-        while (top != null) {
-            result += top.getData() + " -> ";
-            top = top.getNext();
+        while (head != null) {
+            result += head.getData() + " -> ";
+            head = head.getNext();
         }
-        result += top;
+        result += head;
         return result;
     }
 
@@ -38,25 +35,26 @@ public class SimplyLinkedList {
         //Чтобы удалить элемент в середине связанного списка,
         // необходимо установить указатель «ссылка» предыдущего элемента
         // на указатель «ссылка» объекта, который нужно удалить.
-
+        Node head = top;
         int count = 0;
 
-        while (top != null) {
+        while (head != null) {
             if (count == index - 1) {
-                top.setNext(top.getNext().getNext());
+                head.setNext(head.getNext().getNext());
             }
-            top = top.getNext();
+            head = head.getNext();
             count++;
         }
     }
 
     public int getElement(int index) {
+        Node head = top;
         int count = 0;
         int result = 0;
 
-        while (top != null) {
-            result = top.getData();
-            top = top.getNext();
+        while (head != null) {
+            result = head.getData();
+            head = head.getNext();
             if (count == index) {
                 return result;
             }
@@ -70,22 +68,22 @@ public class SimplyLinkedList {
     public Node addLast(int newElement) {
 
         //Прячем значение начала списка в переменную
-        Node first = top;
+        Node head = top;
 
         // проверка, если список пуст
-        if (top == null) return new Node(newElement, null);
+        if (head == null) return new Node(newElement, null);
 
         // пробегаем по всему списку до последнего элемента
-        while (top.getNext() != null) {
-            top = top.getNext();
+        while (head.getNext() != null) {
+            head = head.getNext();
         }
-        top.setNext(new Node(newElement, null));
+        head.setNext(new Node(newElement, null));
 
-        return first;
+        return top;
 
     }
 
-    public static Node addFirst(Node top, int newElement) {
+    public Node addFirst(int newElement) {
 
         Node next = top;
         top = new Node(newElement, next);
@@ -93,40 +91,45 @@ public class SimplyLinkedList {
         return top;
     }
 
-    public static Node addMiddle(Node top, int newElement, int index) {
+    public Node addMiddle(int newElement, int index) {
+
+        Node head = top; // здесь хранится ссылка на начало списка
 
         // проверка, если список пуст
-        if (top == null) return new Node(newElement, null);
+        if (top == null) {
+            return new Node(newElement, null); //В ЭТОМ МЕСТЕ БАГ!!!
+        }
 
         int count = 0;
 
-        Node first = top; // здесь хранится ссылка на начало списка
-
-        while (top != null) {
+        while (head != null) {
             if (count == index - 1) {
-                Node storeNext = top.getNext(); // здесь храним ссылку на элемент, идущий после нового элемента
-                top.setNext(new Node(newElement, storeNext));
+                Node storeNext = head.getNext(); // здесь храним ссылку на элемент, идущий после нового элемента
+                head.setNext(new Node(newElement, storeNext));
 
-                return first;
+                return head;
 
             }
-            top = top.getNext();
+            head = head.getNext();
             count++;
         }
         throw new IndexOutOfBoundsException(); // если не зашли в if, значит вывалились из списка
     }
 
-    public static Node reverse(Node top) {
+    public Node reverse() {
+        Node head = top;
+
         Node prev = null;
         Node next = null;
 
-        while (top != null) {
-            next = top.getNext(); // 2; 3;
-            top.setNext(prev); // 1 -> null;    2 -> 1;
-            prev = top; // 1;   2;
-            top = next; // 2;   3;
+        while (head != null) {
+            next = head.getNext();
+            head.setNext(prev);
+            prev = head;
+            head = next;
         }
-        top = prev; // 7
+        // ВОТ ЗДЕСЬ МОЖЕТ БАГ!!
+        top = prev;
         return top;
     }
 
