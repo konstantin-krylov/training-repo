@@ -84,4 +84,35 @@ public class MyArrayList implements MyLists {
         size++;
         elements = newArray;
     }
+
+    public int max() {
+        int max = elements[0];
+        for (int i = 0; i < size; i++) {
+            if (max < elements[i]) {
+                max=elements[i];
+            }
+        }
+        return max;
+    }
+
+    public int min() {
+        int min = elements[0];
+        for (int i = 0; i < size; i++) {
+            if (min>elements[i]) {
+                min=elements[i];
+            }
+        }
+        return min;
+    }
+
+    public int indexOfMax() {
+        int indexMax = 0;
+        int max = elements[0];
+        for (int i = 0; i < size; i++) {
+            if (max < elements[i]) {
+                indexMax = i;
+            }
+        }
+        return indexMax;
+    }
 }

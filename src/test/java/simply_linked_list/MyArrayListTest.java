@@ -73,4 +73,28 @@ public class MyArrayListTest {
         myArrayList.addMiddle(777,3);
         assertEquals("1 2 3 777 4 5 6 7", myArrayList.listToString());
     }
+
+    @Test
+    public void max() {
+        int[] array = {2000, 17, 1, 3, 20, 5, 100, 7, 900, 1000};
+        MyArrayList myArrayList = new MyArrayList();
+        myArrayList.putIntoList(array);
+        assertEquals(2000, myArrayList.max());
+    }
+
+    @Test
+    public void min() {
+        int[] array = {2000, 17, 1, 3, 20, 5, 100, 7, 900, 1000};
+        MyArrayList myArrayList = new MyArrayList();
+        myArrayList.putIntoList(array);
+        assertEquals(1, myArrayList.min());
+    }
+
+    @Test
+    public void indexOfMax() {
+        int[] array = {2000, 17, 1, 3, 20, 5000, 100, 7, 900, 1000};
+        MyArrayList myArrayList = new MyArrayList();
+        myArrayList.putIntoList(array);
+        assertEquals(5, myArrayList.indexOfMax());
+    }
 }
