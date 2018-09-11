@@ -4,9 +4,6 @@ public class SimplyLinkedList {
 
     private Node top;
 
-    public SimplyLinkedList() {
-    }
-
     public void putIntoList(int[] nums) {
 
         for (int i = nums.length - 1; i >= 0; i--) {
