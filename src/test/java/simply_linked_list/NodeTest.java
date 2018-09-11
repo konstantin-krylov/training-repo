@@ -10,9 +10,13 @@ import static junit.framework.TestCase.assertEquals;
 public class NodeTest {
 
 
+    public SimplyLinkedList createList() {
+       return new SimplyLinkedList();
+    }
+
     @Test
     public void putIntoList() {
-        SimplyLinkedList list = new SimplyLinkedList();
+        MyLists list = createList();
         int[] array = {1, 2, 3, 4, 5, 6, 7};
         list.putIntoList(array);
         assertEquals("1 -> 2 -> 3 -> 4 -> 5 -> 6 -> 7 -> null", list.listToString());
@@ -32,7 +36,7 @@ public class NodeTest {
 
     @Test
     public void getElement() {
-        SimplyLinkedList list = new SimplyLinkedList();
+        MyLists list = createList();
         int[] array = {1, 2, 3, 4, 5, 6, 7};
 
         list.putIntoList(array);
@@ -86,7 +90,7 @@ public class NodeTest {
 
     @Test
     public void reverse() {
-        SimplyLinkedList list = new SimplyLinkedList();
+        MyLists list = createList();
         int[] array = {1, 2, 3, 4, 5, 6, 7};
         list.putIntoList(array);
 

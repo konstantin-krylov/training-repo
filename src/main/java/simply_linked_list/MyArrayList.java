@@ -4,7 +4,7 @@ public class MyArrayList implements MyLists{
 
     private int[] elements;
     private int size;
-    private int index;
+//    private int index;
     private static final int DEFAULT_CAPACITY = 16;
 
     public MyArrayList() {
@@ -18,11 +18,10 @@ public class MyArrayList implements MyLists{
     public void putIntoList(int[] nums) {
 
         for (int i = 0; i < nums.length; i++) {
-            if (index == elements.length) {
+            if (size == elements.length) {
                 growArray();
             }
-            elements[index] = nums[i];
-            index++;
+            elements[size] = nums[i];
             size++;
         }
     }
@@ -32,30 +31,30 @@ public class MyArrayList implements MyLists{
      */
     public void growArray() {
         int[] newArray = new int[elements.length * 2];
-        System.arraycopy(elements, 0, newArray, 0, index - 1);
+        System.arraycopy(elements, 0, newArray, 0, size - 1);
         elements = newArray;
     }
 
     public String listToString() {
         String result = " ";
-        for (int tmp : elements) {
-            result += tmp + " ";
+        for (int i = 0; i < size; i++) {
+            result+=elements[i] + " ";
         }
         return result;
     }
 
     public int getElement(int index) {
-        if (index < 0 || index >= this.index) {
+        if (index < 0 || index >= this.size) {
             throw new IllegalArgumentException();
         }
         return elements[index];
     }
 
     public void reverse() {
-        int[] newArray = new int[elements.length];
-        for (int i = 0; i < elements.length; i++) {
+        int[] newArray = new int[size];
+        for (int i = 0; i < size; i++) {
             newArray[newArray.length - 1-i] = elements[i];
         }
-        System.arraycopy(newArray,0,elements,0,index);
+        elements = newArray;
     }
 }
