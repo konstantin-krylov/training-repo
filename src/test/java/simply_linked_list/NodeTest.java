@@ -11,7 +11,7 @@ public class NodeTest {
 
 
     public SimplyLinkedList createList() {
-       return new SimplyLinkedList();
+        return new SimplyLinkedList();
     }
 
     @Test
@@ -19,7 +19,7 @@ public class NodeTest {
         MyLists list = createList();
         int[] array = {1, 2, 3, 4, 5, 6, 7};
         list.putIntoList(array);
-        assertEquals("1 -> 2 -> 3 -> 4 -> 5 -> 6 -> 7 -> null", list.listToString());
+        assertEquals("1 2 3 4 5 6 7", list.listToString());
     }
 
     @Test
@@ -28,7 +28,7 @@ public class NodeTest {
         int[] array = {1, 2, 3, 4, 5, 6, 7};
         list.putIntoList(array);
         list.deleteElement(3);
-        assertEquals("1 -> 2 -> 3 -> 5 -> 6 -> 7 -> null", list.listToString());
+        assertEquals("1 2 3 5 6 7", list.listToString());
     }
 
     @Rule
@@ -56,7 +56,7 @@ public class NodeTest {
 
         list.addLast(45);
 
-        assertEquals("1 -> 2 -> 3 -> 4 -> 5 -> 6 -> 7 -> 45 -> null", list.listToString());
+        assertEquals("1 2 3 4 5 6 7 45", list.listToString());
     }
 
     @Test
@@ -66,7 +66,7 @@ public class NodeTest {
         list.putIntoList(array);
 
         list.addFirst(45);
-        assertEquals("45 -> 1 -> 2 -> 3 -> 4 -> 5 -> 6 -> 7 -> null", list.listToString());
+        assertEquals("45 1 2 3 4 5 6 7", list.listToString());
     }
 
     @Test
@@ -74,14 +74,14 @@ public class NodeTest {
         /** Тест, если список пуст*/
         SimplyLinkedList list1 = new SimplyLinkedList();
         list1.addMiddle(67, 0);
-        assertEquals("67 -> null", list1.listToString());
+        assertEquals("67", list1.listToString());
 
 
         SimplyLinkedList list = new SimplyLinkedList();
         int[] array = {1, 2, 3, 4, 5, 6, 7};
         list.putIntoList(array);
         list.addMiddle(67, 3);
-        assertEquals("1 -> 2 -> 3 -> 67 -> 4 -> 5 -> 6 -> 7 -> null", list.listToString());
+        assertEquals("1 2 3 67 4 5 6 7", list.listToString());
 
         /** Тест, если выходим за пределы списка*/
         exception.expect(IndexOutOfBoundsException.class);
@@ -95,6 +95,6 @@ public class NodeTest {
         list.putIntoList(array);
 
         list.reverse();
-        assertEquals("7 -> 6 -> 5 -> 4 -> 3 -> 2 -> 1 -> null", list.listToString());
+        assertEquals("7 6 5 4 3 2 1", list.listToString());
     }
 }

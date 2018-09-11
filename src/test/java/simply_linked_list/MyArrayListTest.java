@@ -13,7 +13,7 @@ public class MyArrayListTest {
         int[] array = {1, 2, 3, 4, 5, 6, 7};
         MyArrayList myArrayList = new MyArrayList();
         myArrayList.putIntoList(array);
-        assertEquals(" 1 2 3 4 5 6 7 ", myArrayList.listToString());
+        assertEquals("1 2 3 4 5 6 7", myArrayList.listToString());
     }
 
     @Test
@@ -44,6 +44,6 @@ public class MyArrayListTest {
         MyArrayList myArrayList = new MyArrayList();
         myArrayList.putIntoList(array);
         myArrayList.reverse();
-        assertEquals(" 7 6 5 4 3 2 1 ", myArrayList.listToString());
+        assertEquals("7 6 5 4 3 2 1", myArrayList.listToString());
     }
 }

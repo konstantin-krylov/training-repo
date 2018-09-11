@@ -17,11 +17,11 @@ public class SimplyLinkedList implements MyLists {
         Node head = top;
         String result = "";
         while (head != null) {
-            result += head.getData() + " -> ";
+            result += head.getData() + " ";
             head = head.getNext();
         }
-        result += head;
-        return result;
+        String res = result.substring(0,result.length()-1);
+        return res;
     }
 
     public void deleteElement(int index) {
