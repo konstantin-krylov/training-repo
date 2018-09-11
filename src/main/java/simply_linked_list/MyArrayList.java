@@ -39,13 +39,13 @@ public class MyArrayList implements MyLists {
         for (int i = 0; i < size; i++) {
             result += elements[i] + " ";
         }
-        String res = result.substring(0,result.length()-1);
+        String res = result.substring(0, result.length() - 1);
         return res;
     }
 
     public int getElement(int index) {
         if (index < 0 || index >= this.size) {
-            throw new IllegalArgumentException();
+            throw new IndexOutOfBoundsException();
         }
         return elements[index];
     }
@@ -59,13 +59,29 @@ public class MyArrayList implements MyLists {
     }
 
     public void addLast(int newElement) {
-
-
         if (size == elements.length) {
             growArray();
         }
-//        elements[size] = nums[i];
-        size++;
+        elements[size++] = newElement;
     }
 
+    public void addFirst(int newElement) {
+        int[] newArray = new int[size + 1];
+        newArray[0] = newElement;
+        System.arraycopy(elements, 0, newArray, 1, size);
+        size++;
+        elements = newArray;
+    }
+
+    public void addMiddle(int newElement, int index) {
+        if (index > size || index < 0)
+            throw new IndexOutOfBoundsException();
+
+        int[] newArray = new int[size + 1];
+        System.arraycopy(elements, 0, newArray, 0, index);
+        newArray[index] = newElement;
+        System.arraycopy(elements, index, newArray, index + 1, size - index);
+        size++;
+        elements = newArray;
+    }
 }

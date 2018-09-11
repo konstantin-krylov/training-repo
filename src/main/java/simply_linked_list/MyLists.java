@@ -8,4 +8,10 @@ public interface MyLists {
     int getElement(int index);
 
     void reverse();
+
+    void addLast(int newElement);
+
+    void addFirst(int newElement);
+
+    void addMiddle(int newElement, int index);
 }
