@@ -1,6 +1,6 @@
 package simply_linked_list;
 
-public class MyArrayList {
+public class MyArrayList implements MyLists{
 
     private int[] elements;
     private int size;

@@ -1,6 +1,6 @@
 package simply_linked_list;
 
-public class SimplyLinkedList {
+public class SimplyLinkedList implements MyLists {
 
     private Node top;
 
