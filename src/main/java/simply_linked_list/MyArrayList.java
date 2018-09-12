@@ -89,7 +89,7 @@ public class MyArrayList implements MyLists {
         int max = elements[0];
         for (int i = 0; i < size; i++) {
             if (max < elements[i]) {
-                max=elements[i];
+                max = elements[i];
             }
         }
         return max;
@@ -98,8 +98,8 @@ public class MyArrayList implements MyLists {
     public int min() {
         int min = elements[0];
         for (int i = 0; i < size; i++) {
-            if (min>elements[i]) {
-                min=elements[i];
+            if (min > elements[i]) {
+                min = elements[i];
             }
         }
         return min;
@@ -114,5 +114,35 @@ public class MyArrayList implements MyLists {
             }
         }
         return indexMax;
+    }
+
+    /**Сортировка по возрастанию*/
+    public void ascendingSort() {
+        for (int i = size - 1; i >= 0; i--) {
+            for (int j = 0; j < i; j++) {
+                if (elements[j] > elements[j + 1]) {
+                    int tmp = elements[j];
+                    elements[j] = elements[j + 1];
+                    elements[j + 1] = tmp;
+                }
+            }
+        }
+    }
+
+    /**Сортировка по убыванию
+     * другая реализация пузырьковой сортировки*/
+    public void descendingSort() {
+        boolean noSorted = true;
+        while (noSorted) {
+            noSorted = false;   //делаем предпложение, что массив отсортирован
+            for (int i = 1; i < size; i++) {
+                if (elements[i] > elements[i - 1]) {
+                    int tmp = elements[i];
+                    elements[i] = elements[i - 1];
+                    elements[i - 1] = tmp;
+                    noSorted = true;
+                }
+            }
+        }
     }
 }
