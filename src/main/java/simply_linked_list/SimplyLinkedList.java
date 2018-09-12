@@ -20,7 +20,7 @@ public class SimplyLinkedList implements MyLists {
             result += head.getData() + " ";
             head = head.getNext();
         }
-        String res = result.substring(0,result.length()-1);
+        String res = result.substring(0, result.length() - 1);
         return res;
     }
 
@@ -120,6 +120,92 @@ public class SimplyLinkedList implements MyLists {
             head = next;
         }
         top = prev;
+    }
+
+    public void sort() {
+
+        boolean wasChanged;
+
+        do {
+            Node current = top;
+            Node previous = null;
+            Node next = top.getNext();
+            wasChanged = false;
+
+            while (next != null) {
+                if (current.getData() > next.getData()) {
+
+                    wasChanged = true;
+
+                    if (previous != null) {
+                        Node sig = next.getNext();
+
+                        previous.setNext(next);
+                        next.setNext(current);
+                        current.setNext(sig);
+                    } else {
+                        Node sig = next.getNext();
+
+                        top = next;
+                        next.setNext(current);
+                        current.setNext(sig);
+                    }
+
+                    previous = next;
+                    next = current.getNext();
+                } else {
+                    previous = current;
+                    current = next;
+                    next = next.getNext();
+                }
+            }
+        } while (wasChanged);
+
+    }
+
+    // Doesn't work!!!
+    public void ascendingSort() {
+
+        boolean noSorted = true;
+        Node current = null;
+        Node prev = null;
+        Node next = null;
+
+
+        while (noSorted) {
+
+            current = top;
+            next = top.getNext();
+
+            while (next != null) {
+                noSorted = false;
+                if (current.getData() > next.getData()) {
+
+                    noSorted = true;
+
+                    if (prev != null) {
+                        Node sig = next.getNext();
+
+                        prev.setNext(next);
+                        next.setNext(current);
+                        current.setNext(sig);
+                    } else {
+                        Node sig = next.getNext();
+
+                        top = next;
+                        next.setNext(current);
+                        current.setNext(sig);
+                    }
+
+                    prev = next;
+                    next = current.getNext();
+                } else {
+                    prev = current;
+                    current = next;
+                    next = next.getNext();
+                }
+            }
+        }
     }
 
 }

@@ -97,4 +97,23 @@ public class NodeTest {
         list.reverse();
         assertEquals("7 6 5 4 3 2 1", list.listToString());
     }
+
+    @Test
+    public void sort() {
+        SimplyLinkedList list = new SimplyLinkedList();
+        int[] array1 = {8, 5, 3, 1, 7, 4, 2, 6};
+        list.putIntoList(array1);
+        list.sort();
+        assertEquals("1 2 3 4 5 6 7 8", list.listToString());
+    }
+
+    @Test
+    public void ascendingSort() { // Doesn't work!!
+
+        SimplyLinkedList list1 = new SimplyLinkedList();
+        int[] array1 = {8, 5, 3, 1, 7, 4, 2, 6};
+        list1.putIntoList(array1);
+        list1.ascendingSort();
+        assertEquals("1 2 3 4 5 6 7 8", list1.listToString());
+    }
 }
