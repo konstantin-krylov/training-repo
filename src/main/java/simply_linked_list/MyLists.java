@@ -14,4 +14,8 @@ public interface MyLists {
     void addFirst(int newElement);
 
     void addMiddle(int newElement, int index);
+
+    void ascendingSort();
+
+    void descendingSort();
 }

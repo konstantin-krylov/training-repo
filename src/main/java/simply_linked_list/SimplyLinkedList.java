@@ -122,7 +122,8 @@ public class SimplyLinkedList implements MyLists {
         top = prev;
     }
 
-    public void sort() {
+    // этот код был найден на просорах интернета
+    public void ascendingSort() {
 
         boolean wasChanged;
 
@@ -163,46 +164,50 @@ public class SimplyLinkedList implements MyLists {
 
     }
 
-    // Doesn't work!!!
-    public void ascendingSort() {
 
+    // написан мной, но пришлось подсмотреть несколько моментов
+    // prev 8 -> 5 -> 3 -> 1 -> 7 -> ...
+    public void descendingSort() {
         boolean noSorted = true;
-        Node current = null;
-        Node prev = null;
-        Node next = null;
-
 
         while (noSorted) {
 
-            current = top;
-            next = top.getNext();
+            Node prev = null;
+            Node current = top;
+            Node next = top.getNext();
+            //предполагаем, что лист отсортирован
+            noSorted = false;
 
             while (next != null) {
-                noSorted = false;
-                if (current.getData() > next.getData()) {
 
-                    noSorted = true;
+                if (current.getData() < next.getData()) {
+                    noSorted = true; // тк зашли в цикл, значит лист НЕ отсортирован!!
+
+                    //здесь меняем местами ячейки, стоящие в неправильном порядке
 
                     if (prev != null) {
-                        Node sig = next.getNext();
-
+                        Node tmp = next.getNext();
                         prev.setNext(next);
                         next.setNext(current);
-                        current.setNext(sig);
+                        current.setNext(tmp);
                     } else {
-                        Node sig = next.getNext();
+                        Node tmp = next.getNext();
 
-                        top = next;
+                        //ВОТ ЭТО САМОЕ СЛОЖНОЕ!!! Догадаться как переназначить top на первый элемент
+                        top=next; // переназначение top что бы при печати это был первый элемент отсортированного списка
                         next.setNext(current);
-                        current.setNext(sig);
+                        current.setNext(tmp);
                     }
 
                     prev = next;
-                    next = current.getNext();
+                    next=current.getNext();
+
                 } else {
+
                     prev = current;
                     current = next;
                     next = next.getNext();
+
                 }
             }
         }
