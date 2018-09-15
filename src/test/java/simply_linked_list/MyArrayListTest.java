@@ -70,7 +70,7 @@ public class MyArrayListTest {
         int[] array = {1, 2, 3, 4, 5, 6, 7};
         MyArrayList myArrayList = new MyArrayList();
         myArrayList.putIntoList(array);
-        myArrayList.addMiddle(777,3);
+        myArrayList.addMiddle(777, 3);
         assertEquals("1 2 3 777 4 5 6 7", myArrayList.listToString());
     }
 
@@ -98,21 +98,13 @@ public class MyArrayListTest {
         assertEquals(5, myArrayList.indexOfMax());
     }
 
-    @Test
-    public void ascendingSort() {
-        int[] array = {2000, 17, 1, 3, 20, 5000, 100, 7, 900, 1000};
-        MyArrayList myArrayList = new MyArrayList();
-        myArrayList.putIntoList(array);
-        myArrayList.ascendingSort();
-        assertEquals("1 3 7 17 20 100 900 1000 2000 5000", myArrayList.listToString());
-    }
 
     @Test
-    public void descendingSort() {
+    public void sort() {
         int[] array = {2000, 17, 1, 3, 20, 5000, 100, 7, 900, 1000};
         MyArrayList myArrayList = new MyArrayList();
         myArrayList.putIntoList(array);
-        myArrayList.descendingSort();
+        MyCollections.sort(myArrayList, false);
         assertEquals("5000 2000 1000 900 100 20 17 7 3 1", myArrayList.listToString());
     }
 }

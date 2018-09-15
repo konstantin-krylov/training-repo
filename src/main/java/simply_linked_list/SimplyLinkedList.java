@@ -1,8 +1,11 @@
 package simply_linked_list;
 
-public class SimplyLinkedList implements MyLists {
+import java.util.Collections;
+
+public class SimplyLinkedList extends MyCollections implements MyLists {
 
     private Node top;
+    private int size;
 
     public void putIntoList(int[] nums) {
 
@@ -10,6 +13,7 @@ public class SimplyLinkedList implements MyLists {
             int element = nums[i];
             Node prev = top;
             top = new Node(element, prev);
+            size++;
         }
     }
 
@@ -56,6 +60,24 @@ public class SimplyLinkedList implements MyLists {
         }
 
         throw new IndexOutOfBoundsException();
+
+    }
+
+    public void setElement(int index, int value) {
+        Node head = top;
+        int count = 0;
+
+        while (head != null) {
+            if (count == index) {
+                head.setData(value);
+                return;
+            }
+            head = head.getNext();
+            count++;
+        }
+
+        throw new IndexOutOfBoundsException();
+
 
     }
 
@@ -122,95 +144,8 @@ public class SimplyLinkedList implements MyLists {
         top = prev;
     }
 
-    // этот код был найден на просорах интернета
-    public void ascendingSort() {
-
-        boolean wasChanged;
-
-        do {
-            Node current = top;
-            Node previous = null;
-            Node next = top.getNext();
-            wasChanged = false;
-
-            while (next != null) {
-                if (current.getData() > next.getData()) {
-
-                    wasChanged = true;
-
-                    if (previous != null) {
-                        Node sig = next.getNext();
-
-                        previous.setNext(next);
-                        next.setNext(current);
-                        current.setNext(sig);
-                    } else {
-                        Node sig = next.getNext();
-
-                        top = next;
-                        next.setNext(current);
-                        current.setNext(sig);
-                    }
-
-                    previous = next;
-                    next = current.getNext();
-                } else {
-                    previous = current;
-                    current = next;
-                    next = next.getNext();
-                }
-            }
-        } while (wasChanged);
-
-    }
-
-
-    // написан мной, но пришлось подсмотреть несколько моментов
-    // prev 8 -> 5 -> 3 -> 1 -> 7 -> ...
-    public void descendingSort() {
-        boolean noSorted = true;
-
-        while (noSorted) {
-
-            Node prev = null;
-            Node current = top;
-            Node next = top.getNext();
-            //предполагаем, что лист отсортирован
-            noSorted = false;
-
-            while (next != null) {
-
-                if (current.getData() < next.getData()) {
-                    noSorted = true; // тк зашли в цикл, значит лист НЕ отсортирован!!
-
-                    //здесь меняем местами ячейки, стоящие в неправильном порядке
-
-                    if (prev != null) {
-                        Node tmp = next.getNext();
-                        prev.setNext(next);
-                        next.setNext(current);
-                        current.setNext(tmp);
-                    } else {
-                        Node tmp = next.getNext();
-
-                        //ВОТ ЭТО САМОЕ СЛОЖНОЕ!!! Догадаться как переназначить top на первый элемент
-                        top=next; // переназначение top что бы при печати это был первый элемент отсортированного списка
-                        next.setNext(current);
-                        current.setNext(tmp);
-                    }
-
-                    prev = next;
-                    next=current.getNext();
-
-                } else {
-
-                    prev = current;
-                    current = next;
-                    next = next.getNext();
-
-                }
-            }
-        }
+    public int getSize() {
+        return size;
     }
 
 }

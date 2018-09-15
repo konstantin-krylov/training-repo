@@ -1,9 +1,14 @@
 package simply_linked_list;
 
-public class MyArrayList implements MyLists {
+import java.util.ArrayList;
+import java.util.LinkedList;
+
+public class MyArrayList extends MyCollections implements MyLists {
 
     private int[] elements;
+
     private int size;
+
     private static final int DEFAULT_CAPACITY = 16;
 
     public MyArrayList() {
@@ -44,10 +49,15 @@ public class MyArrayList implements MyLists {
     }
 
     public int getElement(int index) {
-        if (index < 0 || index >= this.size) {
-            throw new IndexOutOfBoundsException();
-        }
+        checkIndex(index);
         return elements[index];
+    }
+
+    public void setElement(int index, int value) {
+        checkIndex(index);
+
+        elements[index] = value;
+
     }
 
     public void reverse() {
@@ -74,8 +84,7 @@ public class MyArrayList implements MyLists {
     }
 
     public void addMiddle(int newElement, int index) {
-        if (index > size || index < 0)
-            throw new IndexOutOfBoundsException();
+        checkIndex(index);
 
         int[] newArray = new int[size + 1];
         System.arraycopy(elements, 0, newArray, 0, index);
@@ -116,33 +125,13 @@ public class MyArrayList implements MyLists {
         return indexMax;
     }
 
-    /**Сортировка по возрастанию*/
-    public void ascendingSort() {
-        for (int i = size - 1; i >= 0; i--) {
-            for (int j = 0; j < i; j++) {
-                if (elements[j] > elements[j + 1]) {
-                    int tmp = elements[j];
-                    elements[j] = elements[j + 1];
-                    elements[j + 1] = tmp;
-                }
-            }
-        }
+    public void checkIndex(int index) {
+        if (index > size || index < 0)
+            throw new IndexOutOfBoundsException();
     }
 
-    /**Сортировка по убыванию
-     * другая реализация пузырьковой сортировки*/
-    public void descendingSort() {
-        boolean noSorted = true;
-        while (noSorted) {
-            noSorted = false;   //делаем предпложение, что массив отсортирован
-            for (int i = 1; i < size; i++) {
-                if (elements[i] > elements[i - 1]) {
-                    int tmp = elements[i];
-                    elements[i] = elements[i - 1];
-                    elements[i - 1] = tmp;
-                    noSorted = true;
-                }
-            }
-        }
+    public int getSize() {
+        return size;
     }
+
 }

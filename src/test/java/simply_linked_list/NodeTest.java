@@ -99,21 +99,11 @@ public class NodeTest {
     }
 
     @Test
-    public void ascendingSort() {
+    public void sort() {
         SimplyLinkedList list = new SimplyLinkedList();
         int[] array1 = {8, 5, 3, 1, 7, 4, 2, 6};
         list.putIntoList(array1);
-        list.ascendingSort();
+        MyCollections.sort(list, true);
         assertEquals("1 2 3 4 5 6 7 8", list.listToString());
-    }
-
-
-    @Test
-    public void descendingSort() {
-        SimplyLinkedList list = new SimplyLinkedList();
-        int[] array1 = {8, 5, 3, 1, 7, 4, 2, 6};
-        list.putIntoList(array1);
-        list.descendingSort();
-        assertEquals("8 7 6 5 4 3 2 1", list.listToString());
     }
 }

@@ -7,6 +7,8 @@ public interface MyLists {
 
     int getElement(int index);
 
+    void setElement(int index, int value);
+
     void reverse();
 
     void addLast(int newElement);
@@ -15,7 +17,5 @@ public interface MyLists {
 
     void addMiddle(int newElement, int index);
 
-    void ascendingSort();
-
-    void descendingSort();
+    int getSize();
 }
