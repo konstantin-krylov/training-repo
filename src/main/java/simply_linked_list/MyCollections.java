@@ -35,4 +35,24 @@ public class MyCollections {
         return min;
     }
 
+    public static int binarySearch(MyLists list, int key) {
+
+        int left = 0;
+        int right = list.getSize();
+        int middle = 0;
+
+        while (!(left >= right)) {
+            middle = left + (right - left) / 2;
+
+            if (list.getElement(middle) == key) {
+                return middle;
+
+            } else if (list.getElement(middle) > key) {
+                right = middle;
+            } else {
+                left = middle + 1;
+            }
+        }
+        return -1; // значение отсутствует!!
+    }
 }

@@ -124,4 +124,14 @@ public class NodeTest {
         MyCollections.max(list);
         assertEquals(1, MyCollections.min(list));
     }
+    @Test
+    public void binarySearch() {
+        int[] array = {1, 2, 3, 4, 5, 6, 7};
+        SimplyLinkedList list = new SimplyLinkedList();
+        list.putIntoList(array);
+        assertEquals(0, SimplyLinkedList.binarySearch(list, 1)); // находит первый элемент
+        assertEquals(4, SimplyLinkedList.binarySearch(list, 5));
+        assertEquals(6, SimplyLinkedList.binarySearch(list, 7)); // находит последний элемент
+        assertEquals(-1, SimplyLinkedList.binarySearch(list, 10)); // корректно работает, если элемента в массиве нет
+    }
 }

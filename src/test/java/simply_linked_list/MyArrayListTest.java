@@ -98,4 +98,59 @@ public class MyArrayListTest {
         list.putIntoList(array);
         assertEquals(1, MyCollections.min(list));
     }
+
+    /**
+     * Распространенные ошибки:
+     * — не работает с массивом из 0/1/2 элементов
+     * — не находит первый или последний элемент
+     * — некорректно работает, если элемента в массиве нет
+     * — некорректно работает, если в массиве есть повторяющиеся элементы
+     * — обращение к элементам за пределами массива
+     * — козырная, которая была в JDK, переполнение целого при вычислении среднего индекса
+     */
+
+    @Test
+    public void binarySearch1() {
+        int[] array = {1, 2};
+        MyArrayList list = new MyArrayList();
+        list.putIntoList(array);
+        assertEquals(0, MyArrayList.binarySearch(list, 1)); // работает с массивом из 2 элементов
+    }
+
+    @Test
+    public void binarySearch2() {
+        int[] array = {1};
+        MyArrayList list = new MyArrayList();
+        list.putIntoList(array);
+        assertEquals(0, MyArrayList.binarySearch(list, 1)); // работает с массивом из 1 элемента
+    }
+
+    @Test
+    public void binarySearch3() {
+        int[] array = {};
+        MyArrayList list = new MyArrayList();
+        list.putIntoList(array);
+        assertEquals(-1, MyArrayList.binarySearch(list, 1)); // работает с массивом из 0 элементов
+    }
+
+    @Test
+    public void binarySearch5() {
+        int[] array = {1, 2, 3, 4, 5, 6, 7};
+        MyArrayList list = new MyArrayList();
+        list.putIntoList(array);
+        assertEquals(0, MyArrayList.binarySearch(list, 1)); // находит первый элемент
+        assertEquals(4, MyArrayList.binarySearch(list, 5));
+        assertEquals(6, MyArrayList.binarySearch(list, 7)); // находит последний элемент
+        assertEquals(-1, MyArrayList.binarySearch(list, 10)); // корректно работает, если элемента в массиве нет
+    }
+
+    // Doesn't work!!!
+    // Нужно что бы выдавался индекс первого повторяющегося элемента????????
+    @Test
+    public void binarySearch6() {
+        int[] array = {1, 2, 2, 2, 2, 3, 4, 5, 6, 7};
+        MyArrayList list = new MyArrayList();
+        list.putIntoList(array);
+        assertEquals(1, MyArrayList.binarySearch(list, 2)); // НЕкорректно работает, если в массиве есть повторяющиеся элементы
+    }
 }
