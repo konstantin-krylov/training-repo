@@ -75,36 +75,27 @@ public class MyArrayListTest {
     }
 
     @Test
-    public void max() {
-        int[] array = {2000, 17, 1, 3, 20, 5, 100, 7, 900, 1000};
-        MyArrayList myArrayList = new MyArrayList();
-        myArrayList.putIntoList(array);
-        assertEquals(2000, myArrayList.max());
-    }
-
-    @Test
-    public void min() {
-        int[] array = {2000, 17, 1, 3, 20, 5, 100, 7, 900, 1000};
-        MyArrayList myArrayList = new MyArrayList();
-        myArrayList.putIntoList(array);
-        assertEquals(1, myArrayList.min());
-    }
-
-    @Test
-    public void indexOfMax() {
-        int[] array = {2000, 17, 1, 3, 20, 5000, 100, 7, 900, 1000};
-        MyArrayList myArrayList = new MyArrayList();
-        myArrayList.putIntoList(array);
-        assertEquals(5, myArrayList.indexOfMax());
-    }
-
-
-    @Test
     public void sort() {
         int[] array = {2000, 17, 1, 3, 20, 5000, 100, 7, 900, 1000};
         MyArrayList myArrayList = new MyArrayList();
         myArrayList.putIntoList(array);
         MyCollections.sort(myArrayList, false);
         assertEquals("5000 2000 1000 900 100 20 17 7 3 1", myArrayList.listToString());
+    }
+
+    @Test
+    public void max() {
+        int[] array = {1, 2, 3, 4, 5, 6, 7};
+        MyArrayList myArrayList = new MyArrayList();
+        myArrayList.putIntoList(array);
+        assertEquals(7, MyCollections.max(myArrayList));
+    }
+
+    @Test
+    public void min() {
+        int[] array = {1, 2, 3, 4, 5, 6, 7};
+        MyArrayList list = new MyArrayList();
+        list.putIntoList(array);
+        assertEquals(1, MyCollections.min(list));
     }
 }

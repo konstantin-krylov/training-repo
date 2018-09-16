@@ -1,8 +1,5 @@
 package simply_linked_list;
 
-import java.util.ArrayList;
-import java.util.LinkedList;
-
 public class MyArrayList extends MyCollections implements MyLists {
 
     private int[] elements;
@@ -30,9 +27,6 @@ public class MyArrayList extends MyCollections implements MyLists {
         }
     }
 
-    /**
-     * увеличить массив если в нем закончилось место
-     */
     public void growArray() {
         int[] newArray = new int[elements.length * 2];
         System.arraycopy(elements, 0, newArray, 0, size - 1);
@@ -94,36 +88,6 @@ public class MyArrayList extends MyCollections implements MyLists {
         elements = newArray;
     }
 
-    public int max() {
-        int max = elements[0];
-        for (int i = 0; i < size; i++) {
-            if (max < elements[i]) {
-                max = elements[i];
-            }
-        }
-        return max;
-    }
-
-    public int min() {
-        int min = elements[0];
-        for (int i = 0; i < size; i++) {
-            if (min > elements[i]) {
-                min = elements[i];
-            }
-        }
-        return min;
-    }
-
-    public int indexOfMax() {
-        int indexMax = 0;
-        int max = elements[0];
-        for (int i = 0; i < size; i++) {
-            if (max < elements[i]) {
-                indexMax = i;
-            }
-        }
-        return indexMax;
-    }
 
     public void checkIndex(int index) {
         if (index > size || index < 0)

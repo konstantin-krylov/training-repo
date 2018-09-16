@@ -106,4 +106,22 @@ public class NodeTest {
         MyCollections.sort(list, true);
         assertEquals("1 2 3 4 5 6 7 8", list.listToString());
     }
+
+    @Test
+    public void max() {
+        SimplyLinkedList list = new SimplyLinkedList();
+        int[] array1 = {8, 5, 3, 1, 7, 4, 2, 6};
+        list.putIntoList(array1);
+        MyCollections.max(list);
+        assertEquals(8, MyCollections.max(list));
+    }
+
+    @Test
+    public void min() {
+        SimplyLinkedList list = new SimplyLinkedList();
+        int[] array1 = {8, 5, 3, 1, 7, 4, 2, 6};
+        list.putIntoList(array1);
+        MyCollections.max(list);
+        assertEquals(1, MyCollections.min(list));
+    }
 }

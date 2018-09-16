@@ -1,6 +1,5 @@
 package simply_linked_list;
 
-import java.util.Collections;
 
 public class SimplyLinkedList extends MyCollections implements MyLists {
 
