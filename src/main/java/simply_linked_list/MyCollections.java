@@ -1,5 +1,9 @@
 package simply_linked_list;
 
+import java.io.*;
+import java.util.HashMap;
+import java.util.Map;
+
 public class MyCollections {
 
     public static void sort(MyLists list, boolean growing) {
@@ -55,4 +59,53 @@ public class MyCollections {
         }
         return -1; // значение отсутствует!!
     }
+
+    public static int[] readingFromFile() { // этот метод наверное нужно вынести из класса MyCollections
+        File file = new File("C:\\Users\\Konstantin\\git\\training-repo\\src\\main\\java\\simply_linked_list\\File.txt");
+        String str;
+        String[] array = null;
+
+        try {
+            BufferedReader reader = new BufferedReader(new FileReader(file));
+            while ((str = reader.readLine()) != null) {
+                // считает только слова в первой строке. на следующую строку не опускается.
+                // нужно будет еще убрать знаки припенания, что бы они не входили в подсчет длины слова
+                array = str.split(" ");
+            }
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        int[] nums = new int[array.length];
+        for (int i = 0; i < array.length; i++) {
+            nums[i] = array[i].length();
+        }
+
+        return nums;
+    }
+
+    public static void count(MyLists list) {
+
+
+        // для подсчета одинаковых вхождений взял класс Map
+        // ХЗ может можно проще
+        Map<Integer, Integer> map = new HashMap<Integer, Integer>();
+        for (int i = 0; i < list.getSize(); i++) {
+            Integer tempInt = list.getElement(i);
+
+            if (!map.containsKey(tempInt)) {
+                map.put(tempInt, 1);
+            } else {
+                map.put(tempInt, map.get(tempInt) + 1);
+            }
+        }
+
+        //Вывод строки пока что такой. Подумаю, может можно поместить его в переменную, что бы потом сравнивать в тестах
+        for (Map.Entry<Integer, Integer> entry : map.entrySet()) {
+            System.out.println("Слово длинной " + entry.getKey() + " встречается " + entry.getValue() + " раз.");
+        }
+    }
+
 }

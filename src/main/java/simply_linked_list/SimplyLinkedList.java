@@ -147,4 +147,22 @@ public class SimplyLinkedList extends MyCollections implements MyLists {
         return size;
     }
 
+    public void addInSort(int newElement) { // добавление элемента в сортированный лист
+        Node head = top;
+
+        // находим ячейку, перед той, в которую будем вставлять
+        while (head.getNext() != null && head.getNext().getData() < newElement) {
+            // если не нашли и следующий элемент - конец списка, значит вставляем в конец
+            if (head.getNext() == null) {
+                addLast(newElement);
+            }
+            head = head.getNext();
+        }
+        Node storeNext = head.getNext(); // здесь храним ссылку на элемент, идущий после нового элемента
+        head.setNext(new Node(newElement, storeNext));
+    }
+
+    public Node copy() {
+        return null;
+    }
 }

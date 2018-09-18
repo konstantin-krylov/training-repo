@@ -144,13 +144,13 @@ public class MyArrayListTest {
         assertEquals(-1, MyArrayList.binarySearch(list, 10)); // корректно работает, если элемента в массиве нет
     }
 
-    // Doesn't work!!!
-    // Нужно что бы выдавался индекс первого повторяющегося элемента????????
+    // Не знаю как написать метод assertEquals для этого метода.
     @Test
-    public void binarySearch6() {
-        int[] array = {1, 2, 2, 2, 2, 3, 4, 5, 6, 7};
+    public void count() {
+        int[]array = MyCollections.readingFromFile();
         MyArrayList list = new MyArrayList();
         list.putIntoList(array);
-        assertEquals(1, MyArrayList.binarySearch(list, 2)); // НЕкорректно работает, если в массиве есть повторяющиеся элементы
+        MyCollections.count(list);
+
     }
 }

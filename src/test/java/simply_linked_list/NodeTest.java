@@ -134,4 +134,14 @@ public class NodeTest {
         assertEquals(6, SimplyLinkedList.binarySearch(list, 7)); // находит последний элемент
         assertEquals(-1, SimplyLinkedList.binarySearch(list, 10)); // корректно работает, если элемента в массиве нет
     }
+    @Test
+    public void addInSort() {
+        SimplyLinkedList list = new SimplyLinkedList();
+        int[] array = {1, 2, 4, 5, 6, 7};
+        list.putIntoList(array);
+
+        list.addInSort(3);
+        list.addInSort(8);
+        assertEquals("1 2 3 4 5 6 7 8", list.listToString());
+    }
 }
