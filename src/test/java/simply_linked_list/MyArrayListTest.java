@@ -144,13 +144,4 @@ public class MyArrayListTest {
         assertEquals(-1, MyArrayList.binarySearch(list, 10)); // корректно работает, если элемента в массиве нет
     }
 
-    // Не знаю как написать метод assertEquals для этого метода.
-    @Test
-    public void count() {
-        int[]array = MyCollections.readingFromFile();
-        MyArrayList list = new MyArrayList();
-        list.putIntoList(array);
-        MyCollections.count(list);
-
-    }
 }
