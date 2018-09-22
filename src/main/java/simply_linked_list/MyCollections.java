@@ -1,8 +1,5 @@
 package simply_linked_list;
 
-import java.io.*;
-import java.util.HashMap;
-import java.util.Map;
 
 public class MyCollections {
 
