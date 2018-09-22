@@ -35,4 +35,38 @@ public class DoubleLinkedListTest {
         list.addMiddle(55,3);
         assertEquals("1 2 3 55 4 5 6 7", list.listToString());
     }
+
+    @Test
+    public void addLast() {
+        DoubleLinkedList list = new DoubleLinkedList();
+        int[] array = {1, 2, 3, 4, 5, 6, 7};
+        list.putIntoList(array);
+        list.addLast(8);
+        assertEquals("1 2 3 4 5 6 7 8", list.listToString());
+    }
+
+    @Test
+    public void getSize() {
+        DoubleLinkedList list = new DoubleLinkedList();
+        int[] array = {1, 2, 3, 4, 5, 6, 7};
+        list.putIntoList(array);
+        assertEquals(7,list.getSize());
+
+        list.addFirst(0);
+        assertEquals(8,list.getSize());
+
+        list.addLast(8);
+        list.addMiddle(55, 3);
+        assertEquals(10,list.getSize());
+
+    }
+
+    @Test
+    public void deleteElement() {
+        DoubleLinkedList list = new DoubleLinkedList();
+        int[] array = {1, 2, 3, 4, 5, 6, 7};
+        list.putIntoList(array);
+        list.deleteElement(2);
+        assertEquals("1 2 4 5 6 7", list.listToString());
+    }
 }
