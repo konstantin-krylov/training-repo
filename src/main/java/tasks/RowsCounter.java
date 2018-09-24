@@ -15,7 +15,7 @@ public class RowsCounter {
         Map<Integer, Integer> map = new HashMap<Integer, Integer>();
 
         while ((str = reader.readLine()) != null) {
-            if ((str.lastIndexOf("-") != -1)) {
+            if ((str.charAt(str.length()-1) == '-')) {
                 str = str.substring(0, str.length() - 1);
                 str += reader.readLine();
             }
