@@ -83,12 +83,10 @@ public class DoubleLinkedList {
             addFirst(newElement);
         }
 
-        while (head.next != null) {
-            head = head.next;
-        }
-        DoubleNode previousNode = head;
+
+        DoubleNode previousNode = tail;
         DoubleNode newNode = new DoubleNode(newElement,null,previousNode);
-        head.next = newNode;
+        tail.next = newNode;
         tail = newNode;
         size++;
     }

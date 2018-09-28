@@ -29,4 +29,30 @@ public class Queue {
         getloc++;
         return q[getloc];
     }
+
+
+    public static void main(String[] args) {
+        int val;
+
+        Queue bigQ = new Queue(100);
+        Queue smallQ = new Queue(4);
+
+        for (int i = 0; i < 26; i++) {
+            bigQ.put(i*3);
+        }
+        for (int i = 0; i < 26; i++) {
+            val = bigQ.get();
+            System.out.print(val+" ");
+        }
+        System.out.println("\n");
+
+        for (int i = 0; i < 7; i++) {
+            smallQ.put(3*i);
+            System.out.println("Trying to put "+3*i);
+        }
+        for (int i = 0; i < 7; i++) {
+            int tmp = smallQ.get();
+            System.out.println(tmp);
+        }
+    }
 }
