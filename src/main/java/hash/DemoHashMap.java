@@ -28,8 +28,8 @@ public class DemoHashMap<K, V> {
 
     public boolean insert(K key, V value) {
         // если хэш таблица достигла своего максимума
-        if (size+1>= threshold) {
-            threshold*=2;
+        if (size + 1 >= threshold) {
+            threshold *= 2;
             // нужно как то удвоить массив и перехэшировать данные в таблице
         }
 
