@@ -1,6 +1,9 @@
 package hash;
 
 
+import java.util.List;
+import java.util.Objects;
+
 public class DemoHashMap<K, V> {
 
     private Node<K, V>[] hashTable;
@@ -43,15 +46,40 @@ public class DemoHashMap<K, V> {
             return true;
         }
 
-        // !!!!Здесь должна быть проверка на совпадение ключей (перезапись значения)
-        // и обработка коллизий.
-        // Для этого:
+        List<Node<K, V>> nodeList = hashTable[index].getNodes();
 
-        // вытаскиваем лист нодов из данной ячейки
-        // пробегаем по нему
-        // проверяем существует ли там такой же ключ как наш
-        // ИЛИ существует коллизия (когда по одному хэшу добавляются разные объекты)
+        for (Node<K, V> nodeFromList : nodeList) {
 
+            if (isCollisium(nodeFromList, newNode, nodeList) ||
+                    isKeyEquals(nodeFromList, newNode, value)) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    public boolean isCollisium(Node<K, V> nodeFromList, Node<K, V> newNode, List<Node<K, V>> nodeList) {
+        if (nodeFromList.hashCode() == newNode.hashCode() &&
+                !Objects.equals(nodeFromList.key, newNode.key) &&
+                !Objects.equals(nodeFromList.value, newNode.value)) {
+            // Если под один и тот же хэш код устанавливаются разные объекты
+            // добавляем в наш лист этот текущий объект
+            nodeList.add(newNode);
+            size++;
+            return true;
+        }
+        return false;
+    }
+
+    public boolean isKeyEquals(Node<K, V> nodeFromList, Node<K, V> newNode, V value) {
+        if (nodeFromList.key.equals(newNode.key) &&
+                !nodeFromList.value.equals(newNode.value)) {
+            //если ключи текущего и нового нода одинаковые, а значения разные
+            //меняем значение текущего нода на значение нового нода
+            nodeFromList.value = value;
+            return true;
+        }
         return false;
     }
 
