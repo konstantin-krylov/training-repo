@@ -5,7 +5,7 @@ import java.io.File;
 public class FileWalker {
     public void walk(String path) {
         File root = new File(path);
-        File[]list = root.listFiles();
+        File[] list = root.listFiles();
 
         if (list == null) return;
 
@@ -14,8 +14,7 @@ public class FileWalker {
             if (f.isDirectory()) {
                 walk(f.getAbsolutePath());
                 System.out.println("Dir: " + f.getAbsolutePath());
-            }
-            else{
+            } else {
                 System.out.println("File: " + f.getAbsoluteFile());
             }
         }
@@ -24,6 +23,6 @@ public class FileWalker {
 
     public static void main(String[] args) {
         FileWalker fw = new FileWalker();
-        fw.walk("D:\\Java\\Books\\");
+        fw.walk("D:\\Java\\Git\\");
     }
 }
