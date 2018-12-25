@@ -5,20 +5,10 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.nio.file.*;
 import java.nio.file.attribute.BasicFileAttributes;
-import java.security.MessageDigest;
 import java.util.*;
 
 
 public class DuplicateFinder {
-//    private static MessageDigest messageDigest;
-
-//    static {
-//        try {
-//            messageDigest = MessageDigest.getInstance("SHA-256");
-//        } catch (NoSuchAlgorithmException e) {
-//            throw new RuntimeException("cannot initialize SHA-256 hash function", e);
-//        }
-//    }
 
     private Path path;
 
@@ -27,9 +17,14 @@ public class DuplicateFinder {
     }
 
     public static void main(String[] args) {
-        Path path = Paths.get("/Users", "konstantin", "eclipse-workspace", "directory"); // заменить на args[0]
+        if (args.length < 1) {
+            System.out.println("Please, supply a directory path");
+            return;
+        }
+        Path path = Paths.get(args[0]);
+
         DuplicateFinder duplicateFinder = new DuplicateFinder(path);
-        Map<Long, List<Path>> filesList = new HashMap<>(); // мапа с файлами для сравнения
+        Map<Long, List<Path>> filesList = new HashMap<>();
         duplicateFinder.directoryWalker(filesList, path);
 
 
@@ -40,32 +35,23 @@ public class DuplicateFinder {
                 duplicateFinder.function1(valueList, item.getKey());
             }
 
-//            Long key = item.getKey();
-//            List<Path> valueList = item.getValue();
-//            System.out.println("Key: " + key + " size " + valueList.size());
-
-
-//            System.out.print("Values: ");
-//            for (Path s : valueList) {
-//                System.out.println(s + " ");
         }
     }
 
-
-    public void directoryWalker(Map<Long, List<Path>> filesList, Path path) {
+    private void directoryWalker(Map<Long, List<Path>> filesList, Path path) {
 
         try {
             Files.walkFileTree(path, new SimpleFileVisitor<Path>() {
                 @Override
                 public FileVisitResult visitFile(Path file, BasicFileAttributes attrs) throws IOException {
                     if (!attrs.isDirectory()) {
-                        List<Path> pathList = filesList.get(attrs.size());  // взять существующий List по ключу
+                        List<Path> pathList = filesList.get(attrs.size());
                         if (pathList == null) {
-                            pathList = new ArrayList<>(); // или создать новый
+                            pathList = new ArrayList<>();
                         }
                         pathList.add(file);
                         filesList.put(attrs.size(), pathList);
-//                        System.out.println("file: " + file.toString() + " size " + attrs.size() + " bytes");
+
                     }
                     return FileVisitResult.CONTINUE;
                 }
@@ -73,35 +59,27 @@ public class DuplicateFinder {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
     }
 
-    public void function1(List<Path> paths, Long size) {
+    private void function1(List<Path> paths, Long size) {
         for (int i = 0; i < paths.size(); i++) {
             for (int j = i + 1; j < paths.size(); j++) {
                 if (compare(paths.get(i), paths.get(j))) {
                     System.out.println("ORIGINAL FILE: " + paths.get(i));
                     System.out.println("DUPLICATE FILE: " + paths.get(j));
-                    System.out.println("FILE SIZE: " + size + "\n");
+                    System.out.println("FILE SIZE: " + size + " bytes" + "\n");
                 }
             }
         }
     }
 
-//    принимает лист <файлов>
-//    внутри листа пишу фор в фор
-//            внутр цикл compare
 
-
-    public boolean compare(Path path1, Path path2) {
+    private boolean compare(Path path1, Path path2) {
         boolean isDuplicate = true;
-        try {
-            FileInputStream fileContent1 = new FileInputStream(path1.toString());
+        try (final FileInputStream fileContent1 = new FileInputStream(path1.toString())) {
+            try (final FileInputStream fileContent2 = new FileInputStream(path2.toString())) {
+                int m, n;
 
-            FileInputStream fileContent2 = new FileInputStream(path2.toString());
-            int m,n;
-
-            try {
                 while ((m = fileContent1.read()) != -1) {
                     n = fileContent2.read();
                     if (m != n) {
@@ -109,13 +87,15 @@ public class DuplicateFinder {
                         break;
                     }
                 }
-            } catch (IOException e) {
-                e.printStackTrace();
             }
+
         } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
             e.printStackTrace();
         }
         return isDuplicate;
     }
 }
+
 
