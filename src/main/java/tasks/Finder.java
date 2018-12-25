@@ -8,10 +8,7 @@ import java.nio.file.*;
 import java.nio.file.attribute.BasicFileAttributes;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 
 public class Finder {
@@ -32,18 +29,24 @@ public class Finder {
     }
 
     public static void main(String[] args) {
-        Path path = Paths.get("/Users", "konstantin", "Projects"); // заменить на args[0]
+        Path path = Paths.get("/Users", "konstantin", "eclipse-workspace", "directory"); // заменить на args[0]
         Finder finder = new Finder(path);
         Map<Long, List<Path>> filesList = new HashMap<>(); // мапа с файлами для сравнения
         finder.directoryWalker(filesList, path);
 
-        for (int i = 0; i < filesList.size(); i++) {
-            for (int j = i+1; j < filesList.size(); j++) {
-                if (filesList.get())// здесь я хочу сравнить файлы из мапы. Можно ли делать это циклами?
-            }
-        }
 
+        for (Map.Entry<Long, List<Path>> item : filesList.entrySet()) {
+
+            Long key = item.getKey();
+            List<Path> valueList = item.getValue();
+            System.out.println("Key: " + key + " size " + valueList.size());
+
+//            System.out.print("Values: ");
+//            for (Path s : valueList) {
+//                System.out.println(s + " ");
+        }
     }
+
 
     public void directoryWalker(Map<Long, List<Path>> filesList, Path path) {
 
@@ -53,11 +56,12 @@ public class Finder {
                 public FileVisitResult visitFile(Path file, BasicFileAttributes attrs) throws IOException {
                     if (!attrs.isDirectory()) {
                         List<Path> pathList = filesList.get(attrs.size());  // взять существующий List по ключу
-                        if (pathList==null) {
+                        if (pathList == null) {
                             pathList = new ArrayList<>(); // или создать новый
                         }
+                        pathList.add(file);
                         filesList.put(attrs.size(), pathList);
-
+                        System.out.println("file: " + file.toString() + " size " + attrs.size() + " bytes");
                     }
                     return FileVisitResult.CONTINUE;
                 }
