@@ -37,7 +37,7 @@ public class RowsCounter {
     }
 
     public static void main(String[] args) throws IOException {
-        String filename = "C:\\Users\\Konstantin\\git\\training-repo\\src\\main\\java\\simply_linked_list\\File.txt";
+        String filename = "//Users/irina/git/training-repo/src/main/java/tasks/File.txt";
 
         RowsCounter.readingFromFile(filename);
     }

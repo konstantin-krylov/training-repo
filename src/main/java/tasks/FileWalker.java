@@ -23,6 +23,6 @@ public class FileWalker {
 
     public static void main(String[] args) {
         FileWalker fw = new FileWalker();
-        fw.walk("D:\\Java\\Git\\");
+        fw.walk("/Users/irina/git/training-repo/src/main/");
     }
 }
