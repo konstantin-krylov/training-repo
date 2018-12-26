@@ -1,7 +1,6 @@
 package tasks;
 
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.nio.file.*;
 import java.nio.file.attribute.BasicFileAttributes;
@@ -32,7 +31,7 @@ public class DuplicateFinder {
 
             List<Path> valueList = item.getValue();
             if (valueList.size() > 1) {
-                duplicateFinder.function1(valueList, item.getKey());
+                duplicateFinder.findDuplicates(valueList, item.getKey());
             }
 
         }
@@ -48,9 +47,9 @@ public class DuplicateFinder {
                         List<Path> pathList = filesList.get(attrs.size());
                         if (pathList == null) {
                             pathList = new ArrayList<>();
+                            filesList.put(attrs.size(), pathList);
                         }
                         pathList.add(file);
-                        filesList.put(attrs.size(), pathList);
 
                     }
                     return FileVisitResult.CONTINUE;
@@ -61,7 +60,7 @@ public class DuplicateFinder {
         }
     }
 
-    private void function1(List<Path> paths, Long size) {
+    private void findDuplicates(List<Path> paths, Long size) {
         for (int i = 0; i < paths.size(); i++) {
             for (int j = i + 1; j < paths.size(); j++) {
                 if (compare(paths.get(i), paths.get(j))) {
@@ -89,10 +88,8 @@ public class DuplicateFinder {
                 }
             }
 
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
         } catch (IOException e) {
-            e.printStackTrace();
+            throw new RuntimeException();
         }
         return isDuplicate;
     }
